@@ -8,7 +8,7 @@ import bot.box.covidtracker.di.koinNetworkModule
 import bot.box.covidtracker.di.koinViewModel
 import org.koin.android.ext.koin.androidContext
 import org.koin.core.context.startKoin
-
+//ProcessLifeCycleOwner.get().addObserver(this)
 class MainApplication : MultiDexApplication() {
 
     override fun attachBaseContext(base: Context?) {

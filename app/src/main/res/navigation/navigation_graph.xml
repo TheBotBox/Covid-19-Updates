@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/navigation_graph"
+    app:startDestination="@id/navigation_home">
+
+    <fragment
+        android:id="@+id/navigation_home"
+        android:name="bot.box.covidtracker.ui.fragment.HomeFragment"
+        android:label="HomeFragment" />
+
+    <fragment
+        android:id="@+id/navigation_updates"
+        android:name="bot.box.covidtracker.ui.fragment.UpdateFragment"
+        android:label="UpdateFragment" />
+
+    <fragment
+        android:id="@+id/navigation_state_list"
+        android:name="bot.box.covidtracker.ui.fragment.StateListFragment"
+        android:label="StateListFragment">
+        <action
+            android:id="@+id/action_stateListFragment_to_stateDetailFragment"
+            app:destination="@id/stateDetailFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/navigation_info"
+        android:name="bot.box.covidtracker.ui.fragment.InfoFragment"
+        android:label="InfoFragment" />
+
+    <fragment
+        android:id="@+id/stateDetailFragment"
+        android:name="bot.box.covidtracker.ui.fragment.StateDetailFragment"
+        android:label="StateDetailFragment" />
+</navigation>

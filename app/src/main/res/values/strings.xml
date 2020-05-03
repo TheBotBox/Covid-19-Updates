@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">CovidTracker</string>
+    <string name="home">Home</string>
+    <string name="updates">Updates</string>
+    <string name="state_list">State List</string>
+    <string name="information">Info</string>
+</resources>

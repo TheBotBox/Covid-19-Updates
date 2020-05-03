@@ -5,7 +5,7 @@ import androidx.multidex.MultiDex
 import androidx.multidex.MultiDexApplication
 import org.koin.android.ext.koin.androidContext
 import org.koin.core.context.startKoin
-
+//ProcessLifeCycleOwner.get().addObserver(this)
 class MainApplication : MultiDexApplication() {
 
     override fun attachBaseContext(base: Context?) {

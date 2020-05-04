@@ -1,6 +1,6 @@
 /build
 *.iml
-/.idea
+/.idea/*
 .DS_Store
 /captures
 .externalNativeBuild

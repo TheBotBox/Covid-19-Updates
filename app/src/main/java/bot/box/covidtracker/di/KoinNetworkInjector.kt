@@ -6,6 +6,7 @@ import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import java.util.concurrent.TimeUnit
 
+
 val provideRetrofit by lazy {
     Retrofit.Builder()
         .baseUrl(BASE_URL)
@@ -15,8 +16,8 @@ val provideRetrofit by lazy {
 
 private val provideOkHttpClient by lazy {
     OkHttpClient().newBuilder()
-        .connectTimeout(60, TimeUnit.SECONDS)
-        .readTimeout(60, TimeUnit.SECONDS)
+        .connectTimeout(20, TimeUnit.SECONDS)
+        .readTimeout(20, TimeUnit.SECONDS)
         .writeTimeout(3, TimeUnit.MINUTES)
         .addInterceptor(provideHTTPLoginInterceptor)
         .build()

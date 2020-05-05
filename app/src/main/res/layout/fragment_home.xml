@@ -1,9 +1,134 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout>
+<layout xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    <data>
+        <import type="bot.box.covidtracker.util.AppUtility"/>
+        <variable
+            name="viewModel"
+            type="bot.box.covidtracker.ui.viewmodel.HomeViewModel" />
+    </data>
+
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+        <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/today_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="10dp"
+                android:text="Today"
+                android:textColor="?android:attr/textColorPrimary"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/last_update"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingBottom="20dp"
+
+                android:textColor="?android:attr/textColorPrimary"
+                android:textSize="8dp"
+                app:layout_constraintLeft_toLeftOf="@id/today_label"
+                app:layout_constraintTop_toBottomOf="@id/today_label" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/t_confirmed"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+
+                android:textColor="?android:attr/textColorPrimary"
+                android:textSize="15sp"
+                android:textStyle="bold"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/last_update"
+                app:layout_constraintWidth_percent="0.33" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/t_recovered"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+
+                android:textColor="?android:attr/textColorPrimary"
+                android:textSize="15sp"
+                android:textStyle="bold"
+                app:layout_constraintLeft_toRightOf="@id/t_confirmed"
+                app:layout_constraintTop_toBottomOf="@id/last_update"
+                app:layout_constraintWidth_percent="0.33" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/t_deaths"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+
+                android:textColor="?android:attr/textColorPrimary"
+                android:textSize="15sp"
+                android:textStyle="bold"
+                app:layout_constraintLeft_toRightOf="@id/t_recovered"
+                app:layout_constraintTop_toBottomOf="@id/last_update"
+                app:layout_constraintWidth_percent="0.33" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/confirm_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="3dp"
+                android:text="@string/confirmed"
+                android:textSize="8sp"
+                app:layout_constraintLeft_toLeftOf="@id/t_confirmed"
+                app:layout_constraintRight_toRightOf="@id/t_confirmed"
+                app:layout_constraintTop_toBottomOf="@id/t_confirmed" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="3dp"
+                android:text="@string/recovered"
+                android:textSize="8sp"
+                app:layout_constraintLeft_toLeftOf="@id/t_recovered"
+                app:layout_constraintRight_toRightOf="@id/t_recovered"
+                app:layout_constraintTop_toBottomOf="@id/t_recovered" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="3dp"
+                android:text="@string/deaths"
+                android:textSize="8sp"
+                app:layout_constraintLeft_toLeftOf="@id/t_deaths"
+                app:layout_constraintRight_toRightOf="@id/t_deaths"
+                app:layout_constraintTop_toBottomOf="@id/t_deaths" />
+
+
+            <View
+                android:id="@+id/today_divider"
+                style="@style/divider"
+                android:layout_width="match_parent"
+                app:layout_constraintTop_toBottomOf="@id/confirm_label" />
+
+            <View
+                android:id="@+id/center"
+                android:layout_width="30dp"
+                android:layout_height="1dp"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/today_divider" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
 </layout>

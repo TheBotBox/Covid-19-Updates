@@ -55,18 +55,11 @@ dependencies {
 
     implementation(Dependencies.materialLib)
 
-    implementation(Dependencies.rxJavaLib)
-    implementation(Dependencies.rxJavaAndroidLib)
 
     implementation(Dependencies.picassoLib)
 
     implementation(Dependencies.lifeCycleLib)
     implementation(Dependencies.lifeCycleViewModelLib)
-
-    implementation(Dependencies.retrofitLib)
-    implementation(Dependencies.retrofitGsonConverterLib)
-    implementation(Dependencies.retrofitRxAdapter)
-    implementation(Dependencies.okHttpLib)
 
     implementation(Dependencies.swipeRefreshLayoutLib)
 
@@ -77,4 +70,6 @@ dependencies {
 
     implementation(Dependencies.navigationLib)
     implementation(Dependencies.navigationUILib)
+
+    api(project(":data"))
 }

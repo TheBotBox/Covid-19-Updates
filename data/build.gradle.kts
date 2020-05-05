@@ -31,11 +31,7 @@ dependencies {
     implementation(Dependencies.appCompatLib)
     implementation(Dependencies.coreKtxLib)
 
-    api(Dependencies.retrofitLib)
-    api(Dependencies.retrofitGsonConverterLib)
-    api(Dependencies.retrofitRxAdapter)
-    api(Dependencies.okHttpLib)
 
-    api(Dependencies.rxJavaLib)
-    api(Dependencies.rxJavaAndroidLib)
+
+    api(project(":domain"))
 }

@@ -71,5 +71,8 @@ dependencies {
     implementation(Dependencies.navigationLib)
     implementation(Dependencies.navigationUILib)
 
+    implementation(Dependencies.sdp)
+    implementation(Dependencies.ssp)
+
     api(project(":data"))
 }

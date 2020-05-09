@@ -1,10 +1,11 @@
 package bot.box.domain.model
 
+import bot.box.domain.common.inNumeric
 import com.google.gson.annotations.SerializedName
 
 data class CovidResponse(
     @SerializedName("cases_time_series")
-    val cases_time_series: List<CovidDaily>,
+    val covidDaily: List<CovidDaily>,
     @SerializedName("statewise")
     val statewise: List<State>
 )
@@ -19,12 +20,18 @@ data class CovidDaily(
     @SerializedName("date")
     val date: String,
     @SerializedName("totalconfirmed")
-    val totalconfirmed: String,
+    var totalconfirmed: String,
     @SerializedName("totaldeceased")
     val totaldeceased: String,
     @SerializedName("totalrecovered")
     val totalrecovered: String
-)
+) {
+    fun getTotalActiveCases() =
+        totalconfirmed.inNumeric - (totaldeceased.inNumeric + (totalrecovered.inNumeric))
+
+    fun getDailyActiveCases() =
+        dailyconfirmed.inNumeric - (dailydeceased.inNumeric + (dailyrecovered.inNumeric))
+}
 
 data class State(
     @SerializedName("active")

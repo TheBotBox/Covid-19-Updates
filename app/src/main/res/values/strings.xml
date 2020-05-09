@@ -4,7 +4,15 @@
     <string name="updates">Updates</string>
     <string name="state_list">State List</string>
     <string name="information">Info</string>
-    <string name="deaths">Deaths</string>
+
     <string name="recovered">Recovered</string>
     <string name="confirmed">Confirmed</string>
+    <string name="deceased">Deceased</string>
+    <string name="today">TODAY</string>
+    <string name="total">TOTAL</string>
+
+    <string name="day_active_count"><![CDATA[<b>%s</b>  Active (<b>%s</b> New)]]></string>
+    <string name="day_confirm_count"><![CDATA[<b>%s</b>  Confirmed (<b>%s</b> New)]]></string>
+    <string name="day_death_count"><![CDATA[<b>%s</b>  Deaths (<b>%s</b> New)]]></string>
+    <string name="day_recovered_count"><![CDATA[<b>%s</b>  Recovered (<b>%s</b> New)]]></string>
 </resources>

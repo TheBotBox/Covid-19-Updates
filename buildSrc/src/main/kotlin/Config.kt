@@ -39,6 +39,8 @@ object Dependencies {
         const val koin = "2.0.1"
         const val multidex = "2.0.1"
         const val navigation = "2.2.1"
+
+        const val ssd = "1.0.6"
     }
 
     const val kotlinStdLib = "org.jetbrains.kotlin:kotlin-stdlib-jdk7:${kotlinVersion}"
@@ -95,6 +97,9 @@ object Dependencies {
     //navigation controller
     const val navigationLib = "androidx.navigation:navigation-fragment-ktx:${Dependencies.Versions.navigation}"
     const val navigationUILib = "androidx.navigation:navigation-ui-ktx:${Dependencies.Versions.navigation}"
+
+    const val sdp = "com.intuit.sdp:sdp-android:${Dependencies.Versions.ssd}"
+    const val ssp = "com.intuit.ssp:ssp-android:${Dependencies.Versions.ssd}"
 }
 
 object TestDependencies {

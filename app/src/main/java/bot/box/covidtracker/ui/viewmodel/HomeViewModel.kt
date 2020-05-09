@@ -4,21 +4,16 @@ import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.viewModelScope
+import bot.box.covidtracker.util.extension.hasNetwork
+import bot.box.covidtracker.util.extension.showToast
 import bot.box.domain.datasource.network.INetworkRepository
-
 import bot.box.domain.datasource.preferennce.IPreference
+import bot.box.domain.model.CovidDaily
 import bot.box.domain.model.CovidResponse
-import io.reactivex.Observable
-import io.reactivex.ObservableSource
-import io.reactivex.Scheduler
-import io.reactivex.SingleObserver
+import bot.box.domain.model.State
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
-import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
-import retrofit2.Retrofit
-import java.util.function.BiFunction
 
 class HomeViewModel(
     private val mApplication: Application,
@@ -27,33 +22,35 @@ class HomeViewModel(
 ) : AndroidViewModel(mApplication) {
     private val disposable = CompositeDisposable()
 
-    private val mData: MutableLiveData<CovidResponse> = MutableLiveData()
-    val _mData: LiveData<CovidResponse>
-        get() = mData
+    var mConnectionStatus: ((Boolean) -> Unit)? = null
+
+    private val covidDaily: MutableLiveData<List<CovidDaily>> = MutableLiveData() // for daily
+    val _covidDaily: LiveData<List<CovidDaily>>
+        get() = covidDaily
+
+    private val mStateWise: MutableLiveData<State> = MutableLiveData() //for first time of state
+    val _mStateWise: LiveData<State>
+        get() = mStateWise
 
     fun getCovidData() {
+        if (!mApplication.hasNetwork()) {
+            mApplication showToast "No Internet Connection"
+        }
         disposable.add(
-            iNetworkRepository.getData()
+            iNetworkRepository.getCovidData()
                 .subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread())
-                .doOnSubscribe { }
-                .doOnError { }
-                .doOnSuccess { }
+                .doOnSubscribe { mConnectionStatus?.invoke(true) }
+                .doOnError { mConnectionStatus?.invoke(false) }
+                .doOnSuccess { mConnectionStatus?.invoke(false) }
                 .subscribe({
-                    mData.value = it
+                    mStateWise.value = it.statewise.first()
+                    covidDaily.value = it.covidDaily.reversed()
                 }, {
-                    it.message
+                    mApplication showToast (it.message ?: "Something went wrong")
                 })
         )
-
-
-        iNetworkRepository.getData().subscribe({
-
-        }, {
-
-        }).dispose()
     }
 
-    fun check(s: String) {}
     override fun onCleared() {
         super.onCleared()
         if (!disposable.isDisposed) disposable.dispose()

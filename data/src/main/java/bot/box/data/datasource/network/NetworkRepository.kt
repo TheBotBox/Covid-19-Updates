@@ -8,5 +8,5 @@ import io.reactivex.Single
 
 class NetworkRepository(private val factory: IApiFactory) :
     INetworkRepository {
-    override fun getData(): Single<CovidResponse> = factory.apiClient.getData()
+    override fun getCovidData(): Single<CovidResponse> = factory.apiClient.getData()
 }

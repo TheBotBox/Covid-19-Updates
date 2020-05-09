@@ -1,9 +1,14 @@
 package bot.box.covidtracker.util
 
 import android.text.format.DateUtils
+import androidx.lifecycle.Observer
 import java.lang.Exception
 import java.text.SimpleDateFormat
 import java.util.*
+
+typealias _OBSERVER<T> = Observer<T>
+typealias LAZY = LazyThreadSafetyMode
+
 
 object AppUtility {
 

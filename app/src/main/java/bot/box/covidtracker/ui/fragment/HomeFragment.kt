@@ -11,24 +11,15 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import bot.box.covidtracker.databinding.FragmentHomeBinding
 import bot.box.covidtracker.ui.adapter.DailyStatsAdapter
 import bot.box.covidtracker.ui.viewmodel.HomeViewModel
+import bot.box.covidtracker.util.LAZY
+import bot.box.covidtracker.util._OBSERVER
 import bot.box.covidtracker.util.extension.getProgressDialog
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
-
-typealias _OBSERVER<T> = Observer<T>
-typealias LAZY = LazyThreadSafetyMode
 
 class HomeFragment : Fragment() {
     private lateinit var mBinding: FragmentHomeBinding
     private val mViewModel by sharedViewModel<HomeViewModel>()
-    private val mProgressDialog by lazy(LAZY.NONE) { activity!!.getProgressDialog() }
     private val mAdapter: DailyStatsAdapter by lazy(LAZY.NONE) { DailyStatsAdapter() }
-
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        mViewModel.mConnectionStatus =
-            { if (it) mProgressDialog.show() else mProgressDialog.dismiss() }
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -36,7 +27,7 @@ class HomeFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         return FragmentHomeBinding.inflate(inflater).apply {
-            lifecycleOwner = this@HomeFragment
+            lifecycleOwner = viewLifecycleOwner
             viewModel = mViewModel
             mRecyclerView.adapter = mAdapter
             mBinding = this

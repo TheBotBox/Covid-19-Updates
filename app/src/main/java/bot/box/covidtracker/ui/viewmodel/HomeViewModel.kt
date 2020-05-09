@@ -11,6 +11,7 @@ import bot.box.domain.datasource.preferennce.IPreference
 import bot.box.domain.model.CovidDaily
 import bot.box.domain.model.CovidResponse
 import bot.box.domain.model.State
+import bot.box.domain.model.UpdateResponse
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
@@ -24,6 +25,8 @@ class HomeViewModel(
 
     var mConnectionStatus: ((Boolean) -> Unit)? = null
 
+    /***************************HomeFragment work starts*******************************************************************/
+
     private val covidDaily: MutableLiveData<List<CovidDaily>> = MutableLiveData() // for daily
     val _covidDaily: LiveData<List<CovidDaily>>
         get() = covidDaily
@@ -35,6 +38,7 @@ class HomeViewModel(
     fun getCovidData() {
         if (!mApplication.hasNetwork()) {
             mApplication showToast "No Internet Connection"
+            return
         }
         disposable.add(
             iNetworkRepository.getCovidData()
@@ -45,6 +49,32 @@ class HomeViewModel(
                 .subscribe({
                     mStateWise.value = it.statewise.first()
                     covidDaily.value = it.covidDaily.reversed()
+                }, {
+                    mApplication showToast (it.message ?: "Something went wrong")
+                })
+        )
+    }
+    /***************************HomeFragment work ends*******************************************************************/
+
+    /***************************UpdateFragment work starts*******************************************************************/
+    private val mUpdates: MutableLiveData<List<UpdateResponse>> = MutableLiveData()
+    val _covidUpdates: LiveData<List<UpdateResponse>> get() = mUpdates
+
+    private val isLoading: MutableLiveData<Boolean> = MutableLiveData()
+    val _isLoading: LiveData<Boolean> get() = isLoading
+
+    fun getUpdates() {
+        if (!mApplication.hasNetwork) {
+            mApplication showToast "No Internet Connection"
+        }
+        disposable.add(
+            iNetworkRepository.getUpdates()
+                .subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread())
+                .doOnSubscribe { isLoading.value = true }
+                .doOnError { isLoading.value = false }
+                .doOnSuccess { isLoading.value = false }
+                .subscribe({
+                    mUpdates.value = it.reversed()
                 }, {
                     mApplication showToast (it.message ?: "Something went wrong")
                 })
